@@ -1,0 +1,14 @@
+
+for trac-875
+
+This is for Trac-875 jira ticket.
+Define utk_mods_etd_author in Solr 
+
+This uses TRACE (Trac-875) branch 
+with utk-fedora-fedoragsearch-solr-config (TRAC-875) branch.
+
+My changes will be made in utk-fedora-fedoragsearch-solr-config (TRAC-875) branch.
+
+Then both branches will have to be pushed to origin for their branches.
+
+
