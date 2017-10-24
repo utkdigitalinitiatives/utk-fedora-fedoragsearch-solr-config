@@ -74,13 +74,15 @@
       <field name="utk_mods_etd_thesis_advisor_ms">  
 
           <xsl:choose>
-  	     <xsl:when test="$dfamily-n!=''">
+  	     <xsl:when test="$family-n!=''">
+		     <xsl:choose>
                      <xsl:when test="$t-o-address!=''">
                            <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
                      </xsl:when>
                      <xsl:otherwise>
 	                   <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
 		     </xsl:otherwise>
+	            </xsl:shoose> 
 	     </xsl:when>
 	     <xsl:otherwise>
 	             <xsl:value-of select="$display-f"/>
@@ -92,21 +94,6 @@
 </xsl:template>
 
 
-
-
-  
-
-
-  <!-- the following template creates an _ms field for thesis advisors -->
-  <!--
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
-    <xsl:variable name="advisor" select="mods:displayForm"/>
-
-    <field name="utk_mods_etd_name_thesis_advisor_ms">
-      <xsl:value-of select="$advisor"/>
-    </field>
-  </xsl:template>
-   -->
 
   <!-- the following template creates an _ms field for committee members -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='Committee Member')]" mode="utk_ir_MODS">
