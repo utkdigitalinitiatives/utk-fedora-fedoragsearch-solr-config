@@ -72,17 +72,21 @@
 
 
       <field name="utk_mods_etd_thesis_advisor_ms">  
+
           <xsl:choose>
-	     <xsl:when test="$display-f!=''">
-	        <xsl:value-of select="$display-f"/>
-	     </xsl:when>		
-             <xsl:when test="$t-o-address!=''">
-                <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
-             </xsl:when>
-             <xsl:otherwise>
-                <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
-             </xsl:otherwise>
-          </xsl:choose>
+  	     <xsl:when test="$dfamily-n!=''">
+                     <xsl:when test="$t-o-address!=''">
+                           <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
+                     </xsl:when>
+                     <xsl:otherwise>
+	                   <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
+		     </xsl:otherwise>
+	     </xsl:when>
+	     <xsl:otherwise>
+	             <xsl:value-of select="$display-f"/>
+	     </xsl:otherwise>
+	  </xsl:choose>
+
       </field>
     </xsl:for-each>
 </xsl:template>
