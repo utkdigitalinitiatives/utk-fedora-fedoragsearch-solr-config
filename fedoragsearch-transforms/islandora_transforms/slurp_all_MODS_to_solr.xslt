@@ -82,7 +82,7 @@
                      <xsl:otherwise>
 	                   <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
 		     </xsl:otherwise>
-	            </xsl:shoose> 
+	            </xsl:choose> 
 	     </xsl:when>
 	     <xsl:otherwise>
 	             <xsl:value-of select="$display-f"/>
