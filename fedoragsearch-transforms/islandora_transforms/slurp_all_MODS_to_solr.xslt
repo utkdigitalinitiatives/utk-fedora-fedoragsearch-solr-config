@@ -108,11 +108,34 @@
 
   <!-- the following template creates an _ms field for committee members -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='Committee Member')]" mode="utk_ir_MODS">
-    <xsl:variable name="comm-member" select="mods:displayForm"/>
+	  
+    <xsl:for-each select=".">
 
-    <field name="utk_mods_etd_name_committee_member_ms">
-      <xsl:value-of select="$comm-member"/>
-    </field>
+	<xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
+	<xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
+	<xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
+        <xsl:variable name="comm-member" select="mods:displayForm"/>
+
+        <field name="utk_mods_etd_committee_member_ms">
+		<xsl:choose>
+		<xsl:when test="$family-n!=''">
+			<xsl:choose>
+				<xsl:when test="$t-o-address!=''">
+					<xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat($family-n, ', ', $given-n)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:when>
+		<xsl:otherwise>
+              		<xsl:value-of select="$comm-member"/>
+		</xsl:otherwise>
+		</xsl:choose>
+        </field>
+    
+    </xsl:for-each>
+
   </xsl:template>
 
   <!-- the following template adds a utk_mods_ir_publication field -->
