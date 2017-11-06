@@ -141,7 +141,14 @@
   <!-- the following template adds a utk_mods_ir_publication field -->
   <xsl:template match="mods:mods/mods:genre[@authority='coar']" mode="utk_ir_MODS">
     <field name="utk_mods_ir_publication_s">
-      <xsl:value-of select="normalize-space(.)"/>
+      <xsl:choose>
+        <xsl:when test="contains(@valueURI, 'c_db06')">
+          <xsl:value-of select="'doctoral dissertation'"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="normalize-space(.)"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </field>
   </xsl:template>
 
