@@ -807,7 +807,7 @@
         results. bridger.
     -->
     <lst name="appends">
-      <str name="fq">-PID:islandora\:bookCollection -PID:islandora\:compound_collection -PID:islandora\:root -PID:islandora\:root -PID:islandora\:manuscriptCollection -PID:islandora\:transformCollection -PID:islandora\:newspaper_collection -PID:islandora\:default_transform -PID:islandora\:binary_object_collection -PID:ir\:Citations -PID:digital\:collections -PID:pcard00\:100200 -PID:collections\:mpabaker -PID:collections\:gsmrc -PID:collections\:ascoop -PID:collections\:sanborn -PID:collections\:kefauver -PID:collections\:wwiioh -PID:collections\:volvoices -PID:collections\:heilman -PID:collections\:alumnus -PID:collections\:bass -PID:ascoop\:1507160000 -PID:gsmrc\:wcc -PID:gsmrc\:derris -PID:gsmrc\:wderfilms -PID:gsmrc\:webster -PID:gsmrc\:adams -PID:gsmrc\:kintner -PID:gsmrc\:pcard00 -PID:gsmrc\:50yrcove</str>
+      <str name="fq">-PID:islandora\:bookCollection -PID:islandora\:compound_collection -PID:islandora\:root -PID:islandora\:root -PID:islandora\:manuscriptCollection -PID:islandora\:transformCollection -PID:islandora\:newspaper_collection -PID:islandora\:default_transform -PID:islandora\:binary_object_collection -PID:ir\:Citations -PID:digital\:collections -PID:pcard00\:100200 -PID:ascoop\:1507160000 -PID:gsmrc\:wcc -PID:gsmrc\:derris -PID:gsmrc\:wderfilms -PID:gsmrc\:webster -PID:gsmrc\:adams -PID:gsmrc\:kintner -PID:gsmrc\:pcard00 -PID:gsmrc\:50yrcove</str>
     </lst>
     <!-- "invariants" are a way of letting the Solr maintainer lock down
          the options available to Solr clients.  Any params values
