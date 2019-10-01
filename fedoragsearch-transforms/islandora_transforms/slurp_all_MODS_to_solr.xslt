@@ -142,7 +142,7 @@
     note: this is *very* generic; it grabs all mods:subjects with an @authority,
     so we may want to add some specificity in here at some point. maybe.
   -->
-  <xsl:template match="mods:mods/mods:subject[@authority]" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:subject[@authority][mods:topic]" mode="utk_MODS">
     <!--
        dots = Database of the Smokies
        lcsh = Library of Congress
