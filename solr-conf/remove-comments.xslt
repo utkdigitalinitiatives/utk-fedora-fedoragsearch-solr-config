@@ -8,4 +8,11 @@
       <xsl:apply-templates select="@*|element()|text()"/>
     </xsl:copy>
   </xsl:template>
+  
+  <xsl:template match="str[@name='hl.bs.chars']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:value-of disable-output-escaping="true" select="'.,!? &amp;#9;&amp;#10;&amp;#13;'"/>
+    </xsl:copy>
+  </xsl:template>
 </xsl:stylesheet>
