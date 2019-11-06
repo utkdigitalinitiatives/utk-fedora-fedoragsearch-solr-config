@@ -370,8 +370,7 @@
                           class="solr.highlight.SimpleBoundaryScanner">
             <lst name="defaults">
                <str name="hl.bs.maxScan">10</str>
-               <str name="hl.bs.chars">.,!? 	
-&#xD;</str>
+               <str name="hl.bs.chars">.,!? &#9;&#10;&#13;</str>
             </lst>
          </boundaryScanner>
          <boundaryScanner name="breakIterator"
