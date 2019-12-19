@@ -405,7 +405,7 @@
     </field>
   </xsl:template>
   
-  <!-- add utk_mods_originInfo_place_placeTerm_text_ms for place terms -->
+  <!-- add utk_mods_originInfo_place_placeTerm_ms for place terms -->
   <xsl:template match="mods:mods/mods:originInfo/mods:place/mods:placeTerm" mode="utk_MODS">
     <field name="utk_mods_originInfo_place_placeTerm_ms">
       <xsl:value-of select="normalize-space(.)"/>
