@@ -9,7 +9,7 @@
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
-  <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+       <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -328,13 +328,11 @@
     </field>
   </xsl:template>
   
-  <!-- add utk_mods_accessCondition_local_ms for Local Access Conditions values-->
+  <!-- add utk_mods_accessCondition_local_ms for values not associated with the type attributes of "use and reproduction" or "restriction on access"-->
   <xsl:template match="mods:mods/mods:accessCondition" mode="utk_MODS">
-    <xsl:if test="self::node()[@type!='use and reproduction' or 'restriction on access'] or self::node()[not(@type)]">
     <field name="utk_mods_accessCondition_local_ms">
       <xsl:value-of select="normalize-space(.)"/>
     </field>
-    </xsl:if>
   </xsl:template>
   
   <!-- add utk_mods_accessCondition_use_and_reproduction_ms for Standardized Rights values-->
