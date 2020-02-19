@@ -459,5 +459,50 @@
       <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
     </field>
   </xsl:template>
+
+  <!-- add mods_originInfo_date_etdf_* -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf]" mode="utk_MODS">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    <xsl:variable name="date-text" select="normalize-space(.)"/>
+
+    <xsl:choose>
+      <!--
+        watch for '[...]'; e.g.
+        kefauver:150412001
+        kefauver:150412002
+      -->
+
+      <xsl:when test="contains($date-text, '[')">
+        <xsl:variable name="date-range-start">
+          <xsl:call-template name="get_ISO8601_edtf_date">
+            <xsl:with-param name="date" select="substring-after(substring-before($date-text, '-'), '[')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="date-range-end">
+          <xsl:call-template name="get_ISO8601_edtf_date">
+            <xsl:with-param name="date" select="substring-after(substring-before($date-text, ']'), '-')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:choose>
+          <xsl:when test="not(normalize-space($date-range-start)) = '' and not(normalize-space($date-range-end)) = ''">
+            <field name="mods_originInfo_dateCreated_edtf_start_dt">
+              <xsl:value-of select="normalize-space($date-range-start)"/>
+            </field>
+            <field name="mods_originInfo_dateCreated_edtf_end_dt">
+              <xsl:value-of select="normalize-space($date-range-end)"/>
+            </field>
+          </xsl:when>
+          <!-- add an otherwise? -->
+        </xsl:choose>
+      </xsl:when>
+    </xsl:choose>
+
+  </xsl:template>
   
 </xsl:stylesheet>
