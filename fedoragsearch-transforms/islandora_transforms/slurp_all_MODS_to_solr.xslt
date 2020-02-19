@@ -9,7 +9,7 @@
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
-       <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+  <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>-->
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -69,13 +69,6 @@
     </field>
   </xsl:template>
   
-  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
-    <xsl:variable name="decade" select="substring(., 1, 3)"/>
-    <field name="utk_mods_dateCreated_decade_ms">
-          <xsl:value-of select="concat($decade, '0s')"/>
-    </field>
-  </xsl:template>
-
   <!-- add utk_mods_titleInfo_title_ms -->
   <xsl:template match="mods:mods/mods:titleInfo[not(@supplied)]/mods:title" mode="utk_MODS">
     <field name="utk_mods_titleInfo_title_ms">
@@ -395,14 +388,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
-  <!-- add utk_mods_originInfo_dateIssued_ms for all dateIssueds -->
-  <xsl:template match="mods:mods/mods:originInfo/mods:dateIssued" mode="utk_MODS">
-    <field name="utk_mods_originInfo_dateIssued_ms">
-      <xsl:value-of select="normalize-space(.)"/>
-    </field>
-  </xsl:template>
-  
+
   <!-- add utk_mods_originInfo_place_placeTerm_ms for place terms -->
   <xsl:template match="mods:mods/mods:originInfo/mods:place/mods:placeTerm" mode="utk_MODS">
     <field name="utk_mods_originInfo_place_placeTerm_ms">
@@ -424,13 +410,6 @@
     </field>
   </xsl:template>
 
-  <!-- add mods_originInfo_ms -->
-  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated or mods:dateOther]" mode="utk_MODS">
-    <field name="utk_mods_originInfo_date_ms">
-      <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
-    </field>
-  </xsl:template>
-  
   <!-- add utk_mods_relatedItem_featuredItem_titleInfo_title_ms -->
   <xsl:template match="mods:relatedItem[@displayLabel='Featured Item']/mods:titleInfo/mods:title" mode="utk_MODS">
     <field name="utk_mods_relatedItem_featuredItem_titleInfo_title_ms">
@@ -456,6 +435,28 @@
   <xsl:template match="mods:relatedItem[@displayLabel='Featured Item']/mods:originInfo[mods:dateCreated or mods:dateIssued]" mode="utk_MODS">
     <field name="utk_mods_relatedItem_featuredItem_date_ms">
       <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- add _dateCreated_decade_ms -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
+    <xsl:variable name="decade" select="substring(., 1, 3)"/>
+    <field name="utk_mods_dateCreated_decade_ms">
+      <xsl:value-of select="concat($decade, '0s')"/>
+    </field>
+  </xsl:template>
+
+  <!-- add utk_mods_originInfo_dateIssued_ms for all dateIssueds -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateIssued" mode="utk_MODS">
+    <field name="utk_mods_originInfo_dateIssued_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- add mods_originInfo_ms -->
+  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated or mods:dateOther]" mode="utk_MODS">
+    <field name="utk_mods_originInfo_date_ms">
+      <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
     </field>
   </xsl:template>
   
