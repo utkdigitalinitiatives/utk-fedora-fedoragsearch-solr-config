@@ -501,7 +501,75 @@
           <!-- add an otherwise? -->
         </xsl:choose>
       </xsl:when>
+      
+      <!--
+        process '/' b/c that's another range
+      -->
+      <xsl:when test="contains($date-text, '/')">
+        <xsl:variable name="date-range-start">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="substring-before($date-text, '/')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="date-range-end">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="substring-after($date-text, '/')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:choose>
+          <xsl:when test="not(normalize-space($date-range-start)) = '' and not(normalize-space($date-range-end)) = ''">
+            <field name="mods_originInfo_dateCreated_edtf_start_dt">
+              <xsl:value-of select="$date-range-start"/>
+            </field>
+            <field name="mods_originInfo_dateCreated_edtf_end_dt">
+              <xsl:value-of select="$date-range-end"/>
+            </field>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:when>
+
+      <!--
+        treat all possible edtf values: ~,uU,?
+      -->
+      <xsl:when test="contains($date-text, '~') or contains($date-text, 'u') or contains($date-text, 'U') or contains($date-text, '?')">
+        <xsl:variable name="edtf-date">
+          <xsl:call-template name="get_ISO8601_edtf_date">
+            <xsl:with-param name="date" select="$date-text"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <field name="mods_originInfo_dateCreated_edtf_dt">
+          <xsl:value-of select="normalize-space($edtf-date)"/>
+        </field>
+      </xsl:when>
     </xsl:choose>
+
+    <!-- otherwise... -->
+    <xsl:otherwise>
+      <xsl:variable name="otherwise-date">
+        <xsl:call-template name="get_ISO8601_date">
+          <xsl:with-param name="date" select="$date-text"/>
+          <xsl:with-param name="pid" select="$pid"/>
+          <xsl:with-param name="datastream" select="$datastream"/>
+        </xsl:call-template>
+      </xsl:variable>
+
+      <xsl:if test="not(normalize-space($otherwise-date)) = ''">
+        <field name="mods_originInfo_dateCreated_edtf_dt">
+          <xsl:value-of select="normalize-space($otherwise-date)"/>
+        </field>
+      </xsl:if>
+    </xsl:otherwise>
+  </xsl:template>
+
+  <!-- handle dateCreated[@edtf][@point='start'] or [@point='end'] -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point]" mode="utk_MODS">
 
   </xsl:template>
   
