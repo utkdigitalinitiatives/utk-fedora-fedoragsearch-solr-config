@@ -568,9 +568,46 @@
     </xsl:otherwise>
   </xsl:template>
 
-  <!-- handle dateCreated[@edtf][@point='start'] or [@point='end'] -->
-  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point]" mode="utk_MODS">
+  <!-- handle dateCreated[@edtf][@point='start'] -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point='start']" mode="utk_MODS">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    <xsl:variable name="date-text" select="normalize-space(.)"/>
 
+    <xsl:variable name="point-start">
+      <xsl:call-template name="get_ISO8601_edtf_date">
+        <xsl:with-param name="date" select="$date-text"/>
+        <xsl:with-param name="pid" select="$pid"/>
+        <xsl:with-param name="datastream" select="$datastream"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:if test="not(normalize-space($point-start)) = ''">
+      <field name="mods_originInfo_dateCreated_edtf_point_start_dt">
+        <xsl:value-of select="normalize-space($point-start)"/>
+      </field>
+    </xsl:if>
+  </xsl:template>
+
+  <!-- handle dateCreated[@edtf][@point='end'] -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point='end']" mode="utk_MODS">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    <xsl:variable name="date-text" select="normalize-space(.)"/>
+
+    <xsl:variable name="point-end">
+      <xsl:call-template name="get_ISO8601_edtf_date">
+        <xsl:with-param name="date" select="$date-text"/>
+        <xsl:with-param name="pid" select="$pid"/>
+        <xsl:with-param name="datastream" select="$datastream"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:if test="not(normalize-space($point-end)) = ''">
+      <field name="mods_originInfo_dateCreated_edtf_point_end_dt">
+        <xsl:value-of select="normalize-space($point-end)"/>
+      </field>
+    </xsl:if>
   </xsl:template>
   
 </xsl:stylesheet>
