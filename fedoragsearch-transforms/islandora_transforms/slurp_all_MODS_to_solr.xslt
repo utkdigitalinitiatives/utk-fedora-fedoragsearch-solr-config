@@ -548,25 +548,26 @@
           <xsl:value-of select="normalize-space($edtf-date)"/>
         </field>
       </xsl:when>
+
+      <!-- otherwise... -->
+      <xsl:otherwise>
+        <xsl:variable name="otherwise-date">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="$date-text"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:if test="not(normalize-space($otherwise-date)) = ''">
+          <field name="mods_originInfo_dateCreated_edtf_dt">
+            <xsl:value-of select="normalize-space($otherwise-date)"/>
+          </field>
+        </xsl:if>
+      </xsl:otherwise>
+
     </xsl:choose>
-
-    <!-- otherwise... -->
-    <xsl:otherwise>
-      <xsl:variable name="otherwise-date">
-        <xsl:call-template name="get_ISO8601_date">
-          <xsl:with-param name="date" select="$date-text"/>
-          <xsl:with-param name="pid" select="$pid"/>
-          <xsl:with-param name="datastream" select="$datastream"/>
-        </xsl:call-template>
-      </xsl:variable>
-
-      <xsl:if test="not(normalize-space($otherwise-date)) = ''">
-        <field name="mods_originInfo_dateCreated_edtf_dt">
-          <xsl:value-of select="normalize-space($otherwise-date)"/>
-        </field>
-      </xsl:if>
-    </xsl:otherwise>
-  </xsl:template>
+</xsl:template>
 
   <!-- handle dateCreated[@edtf][@point='start'] -->
   <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point='start']" mode="utk_MODS">
