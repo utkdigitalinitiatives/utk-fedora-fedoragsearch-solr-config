@@ -454,14 +454,14 @@
   </xsl:template>
 
   <!-- add mods_originInfo_ms -->
-  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated or mods:dateOther]" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated[not(@encoding='edtf')] or mods:dateOther]" mode="utk_MODS">
     <field name="utk_mods_originInfo_date_ms">
       <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
     </field>
   </xsl:template>
 
   <!-- add mods_originInfo_date_etdf_* -->
-  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf]" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
     <xsl:param name="pid">not provided</xsl:param>
     <xsl:param name="datastream">not provided</xsl:param>
     <xsl:variable name="date-text" select="normalize-space(.)"/>
@@ -490,7 +490,7 @@
         </xsl:variable>
 
         <xsl:choose>
-          <xsl:when test="not(normalize-space($date-range-start)) = '' and not(normalize-space($date-range-end)) = ''">
+          <xsl:when test="not(normalize-space($date-range-start) = '') and not(normalize-space($date-range-end) = '')">
             <field name="mods_originInfo_dateCreated_edtf_start_dt">
               <xsl:value-of select="normalize-space($date-range-start)"/>
             </field>
@@ -522,7 +522,7 @@
         </xsl:variable>
 
         <xsl:choose>
-          <xsl:when test="not(normalize-space($date-range-start)) = '' and not(normalize-space($date-range-end)) = ''">
+          <xsl:when test="not(normalize-space($date-range-start) = '') and not(normalize-space($date-range-end) = '')">
             <field name="mods_originInfo_dateCreated_edtf_start_dt">
               <xsl:value-of select="$date-range-start"/>
             </field>
@@ -559,7 +559,7 @@
           </xsl:call-template>
         </xsl:variable>
 
-        <xsl:if test="not(normalize-space($otherwise-date)) = ''">
+        <xsl:if test="not(normalize-space($otherwise-date) = '')">
           <field name="mods_originInfo_dateCreated_edtf_dt">
             <xsl:value-of select="normalize-space($otherwise-date)"/>
           </field>
@@ -570,7 +570,7 @@
 </xsl:template>
 
   <!-- handle dateCreated[@edtf][@point='start'] -->
-  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point='start']" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf'][@point='start']" mode="utk_MODS">
     <xsl:param name="pid">not provided</xsl:param>
     <xsl:param name="datastream">not provided</xsl:param>
     <xsl:variable name="date-text" select="normalize-space(.)"/>
@@ -583,7 +583,7 @@
       </xsl:call-template>
     </xsl:variable>
 
-    <xsl:if test="not(normalize-space($point-start)) = ''">
+    <xsl:if test="not(normalize-space($point-start) = '')">
       <field name="mods_originInfo_dateCreated_edtf_point_start_dt">
         <xsl:value-of select="normalize-space($point-start)"/>
       </field>
@@ -591,7 +591,7 @@
   </xsl:template>
 
   <!-- handle dateCreated[@edtf][@point='end'] -->
-  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@edtf][@point='end']" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf'][@point='end']" mode="utk_MODS">
     <xsl:param name="pid">not provided</xsl:param>
     <xsl:param name="datastream">not provided</xsl:param>
     <xsl:variable name="date-text" select="normalize-space(.)"/>
@@ -604,7 +604,7 @@
       </xsl:call-template>
     </xsl:variable>
 
-    <xsl:if test="not(normalize-space($point-end)) = ''">
+    <xsl:if test="not(normalize-space($point-end) = '')">
       <field name="mods_originInfo_dateCreated_edtf_point_end_dt">
         <xsl:value-of select="normalize-space($point-end)"/>
       </field>
