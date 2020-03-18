@@ -456,9 +456,6 @@
     </xsl:if>
 
     <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
-
-      <xsl:with-param name="pid" select="$pid"/>
-      <xsl:with-param name="datastream" select="$datastream"/>
       <xsl:call-template name="basic_date"/>
     </xsl:if>
   </xsl:template>
