@@ -21,10 +21,6 @@
     <!-- Clearing hash in case the template is ran more than once. -->
     <xsl:variable name="return_from_clear" select="java:clear($single_valued_hashset)"/>
 
-    <!--
-      creates a mode for MODS records that do *not* have a mods:identifer starting with 'utk_' *AND* do *not* have a
-      mods:genre = 'Academic theses'.
-    -->
     <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1]"/>
     <xsl:apply-templates mode="utk_MODS_dates" select="$content//mods:mods[1]/mods:originInfo"/>
   </xsl:template>
@@ -441,166 +437,18 @@
 
   <!-- try to refactor all of the mods:mods/mods:originInfo/mods:date* handling to one template -->
   <xsl:template match="mods:mods/mods:originInfo" mode="utk_MODS_dates">
-
-    <!-- note: call-template inherites context -->
+    <xsl:param name="pid"/>
+    <xsl:param name="datastream"/>
+    
     <xsl:if test="child::mods:dateCreated[@encoding='edtf']">
       <xsl:call-template name="edtf">
-        <xsl:with-param name="pid"/>
-        <xsl:with-param name="datastream"/>
+        
       </xsl:call-template>
-
-      <xsl:call-template name="make_decade"/>
-    </xsl:if>
-
-    <xsl:if test="child::mods:dateIssued">
-      <xsl:call-template name="date_issued"/>
-    </xsl:if>
-
-    <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
-      <xsl:call-template name="basic_date"/>
     </xsl:if>
   </xsl:template>
-
-  <xsl:template name="edtf" mode="utk_MODS_dates">
-    <xsl:param name="pid" select="'not provided'"/>
-    <xsl:param name="datastream" select="'not provided'"/>
-    <xsl:param name="date-text" select="child::mods:dateCreated[@encoding='edtf']"/>
-    <xsl:variable name="raw-date" select="normalize-space(child::mods:dateCreated[@encoding='edtf'])"/>
+  
+  <xsl:template name="edtf">
     
-    <xsl:choose>
-      <!--
-        catches '[...]'; e.g. kefauver:150412001 and kefauver:150412002
-      -->
-      <xsl:when test="contains($raw-date, '[')">
-        <xsl:variable name="date-range-start">
-          <xsl:call-template name="get_ISO8601_edtf_date">
-            <xsl:with-param name="date" select="substring-after(substring-before($date-text, '-'), '[')"/>
-            <xsl:with-param name="pid" select="$pid"/>
-            <xsl:with-param name="datastream" select="$datastream"/>
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="date-range-end">
-          <xsl:call-template name="get_ISO8601_edtf_date">
-            <xsl:with-param name="date" select="substring-after(substring-before($date-text, ']'), '-')"/>
-            <xsl:with-param name="pid" select="$pid"/>
-            <xsl:with-param name="datastream" select="$datastream"/>
-          </xsl:call-template>
-        </xsl:variable>
-        
-        <!-- sub-choose because -->
-        <xsl:choose>
-          <xsl:when test="not(normalize-space($date-range-start) = '') and not(normalize-space($date-range-end) = '')">
-            <field name="utk_mods_edtf_range_start_dt">
-              <xsl:value-of select="normalize-space($date-range-start)"/>
-            </field>
-            <field name="utk_mods_edtf_range_end_dt">
-              <xsl:value-of select="normalize-space($date-range-end)"/>
-            </field>
-          </xsl:when>
-          <xsl:otherwise>
-            <field name="utk_mods_etdf_range_fallback_s">
-              <xsl:value-of select="normalize-space($raw-date)"/>
-            </field>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
-      
-      <!-- second range pattern, this one is called 'solidus' -->
-      <xsl:when test="contains($raw-date, '/')">
-        <xsl:variable name="date-range-start">
-          <xsl:call-template name="get_ISO8601_date">
-            <xsl:with-param name="date" select="substring-before($raw-date, '/')"/>
-            <xsl:with-param name="pid" select="$pid"/>
-            <xsl:with-param name="datastream" select="$datastream"/>
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="date-range-end">
-          <xsl:call-template name="get_ISO8601_date">
-            <xsl:with-param name="date" select="substring-after($raw-date, '/')"/>
-            <xsl:with-param name="pid" select="$pid"/>
-            <xsl:with-param name="datastream" select="$datastream"/>
-          </xsl:call-template>
-        </xsl:variable>
-        
-        <!-- sub-choose because -->
-        <xsl:choose>
-          <xsl:when test="not(normalize-space($date-range-start) = '') and not(normalize-space($date-range-end) = '')">
-            <field name="utk_mods_edtf_solidus_range_start_dt">
-              <xsl:value-of select="normalize-space($date-range-start)"/>
-            </field>
-            <field name="utk_mods_edtf_solidus_range_end_dt">
-              <xsl:value-of select="normalize-space($date-range-end)"/>
-            </field>
-          </xsl:when>
-          <xsl:otherwise>
-            <field name="utk_mods_edtf_solidus_range_fallback_s">
-              <xsl:value-of select="$raw-date"/>
-            </field>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
-      
-      <!-- date-unknown patterns -->
-      <xsl:when test="contains($raw-date, '~') or contains($raw-date, 'u') or contains($raw-date, 'U') or contains($raw-date, '?')">
-        <xsl:variable name="uncertainty-patterns">
-          <xsl:call-template name="get_ISO8601_edtf_date">
-            <xsl:with-param name="date" select="$raw-date"/>
-            <xsl:with-param name="pid" select="$pid"/>
-            <xsl:with-param name="datastream" select="$datastream"/>
-          </xsl:call-template>
-        </xsl:variable>
-        
-        <!-- sub-choose -->
-        <xsl:choose>
-          <xsl:when test="not(normalize-space($uncertainty-patterns) = '')">
-            <field name="utk_mods_edft_uncertainty_date_dt">
-              <xsl:value-of select="normalize-space($uncertainty-patterns)"/>
-            </field>
-          </xsl:when>
-          <xsl:otherwise>
-            <field name="utk_mods_edtf_uncertainty_date_s">
-              <xsl:value-of select="normalize-space($uncertainty-patterns)"/>
-            </field>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
-      
-      <!-- closing otherwise -->
-      <xsl:otherwise>
-        <field name="utk_mods_edtf_otherwise_s">
-          <xsl:value-of select="normalize-space($raw-date)"/>
-        </field>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-  
-  <!-- decade_ms field -->
-  <xsl:template name="make_decade" mode="utk_MODS_dates">
-    <xsl:variable name="decade" select="substring(normalize-space(child::mods:dateCreated[@encoding='edtf']), 1, 3)"/>
-    <field name="utk_mods_dateCreated_decade_ms"><xsl:value-of select="concat($decade, '0s')"/></field>
-  </xsl:template>
-  
-  <!-- dateIssued_ms field: for all dateIssueds -->
-  <xsl:template name="date_issued" mode="utk_MODS_dates">
-    <xsl:variable name="date" select="normalize-space(child::mods:dateIssued)"/>
-    <field name="utk_mods_originInfo_dateIssued_ms"><xsl:value-of select="$date"/></field>
-  </xsl:template>
-  
-  <!-- originInfo_date field -->
-  <xsl:template name="basic_date" mode="utk_MODS_dates">
-    <field name="utk_mods_originInfo_dateCreated_ms">
-      <xsl:choose>
-        <xsl:when test="child::mods:dateCreated[not(@encoding)]">
-          <xsl:value-of select="child::mods:dateCreated[not(@encoding)]"/>
-        </xsl:when>
-        <xsl:when test="child::mods:dateOther[not(@*)]">
-          <xsl:value-of select="child::mods:dateOther[not(@*)]"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="'tests-failed'"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </field>
   </xsl:template>
   
   <xsl:template name="get_ISO8601_date">
