@@ -442,12 +442,61 @@
     
     <xsl:if test="child::mods:dateCreated[@encoding='edtf']">
       <xsl:call-template name="edtf">
-        
+        <xsl:with-param name="pid"/>
+        <xsl:with-param name="datastream"/>
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
   
   <xsl:template name="edtf">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+
+    <xsl:variable name="normalized-date" select="normalize-space(child::mods:dateCreated[@encoding='edtf'])"/>
+    
+    <xsl:choose>
+      <!--
+        catches '[...]'; e.g. kefauver:150412001 and kefauver:150412002
+      -->
+      <xsl:when test="contains($normalized-date, '[')">
+        <xsl:variable name="date-range-start">
+          <xsl:call-template name="get_ISO8601_edtf_date">
+            <xsl:with-param name="date" select="substring-after(substring-before($normalized-date, '-'), '[')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="date-range-end">
+          <xsl:call-template name="get_ISO8601_edtf_date">
+            <xsl:with-param name="date" select="substring-after(substring-before($normalized-date, ']'), '-')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>            
+          </xsl:call-template>
+        </xsl:variable>
+        
+        <!-- sub-choose b/c -->
+        <xsl:choose>
+          <!-- 
+            this sub-choose creates _edtf_range_start and edtf_range_end _dt fields,
+            otherwise creating an _edtf_range_fallback_s field.
+          -->
+          <xsl:when test="not(normalize-space($date-range-start)='') and not(normalize-space($date-range-end)='')">
+            <field name="utk_mods_edtf_range_start_dt">
+              <xsl:value-of select="normalize-space($date-range-start)"/>
+            </field>
+            <field name="utk_mods_edtf_range_end_dt">
+              <xsl:value-of select="normalize-space($date-range-end)"/>
+            </field>
+          </xsl:when>
+          <xsl:otherwise>
+            <field name="utk_mods_edtf_range_fallback_s">
+              <xsl:value-of select="normalize-space($normalized-date)"/>
+            </field>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      
+    </xsl:choose>
     
   </xsl:template>
   
