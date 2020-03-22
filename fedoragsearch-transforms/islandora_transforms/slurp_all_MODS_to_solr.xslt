@@ -449,8 +449,18 @@
       
       <xsl:call-template name="decades"/>
     </xsl:if>
+    
+    <!-- call templates for mods:dateIssued -->
+    <xsl:if test="child::mods:dateIssued">
+      <xsl:call-template name="date_issued"/>
+    </xsl:if>
+    
+    <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
+      <xsl:call-template name="basic_date"/>
+    </xsl:if>
   </xsl:template>
   
+  <!-- process mods:dateCreated[@encoding='edtf'] -->
   <xsl:template name="edtf">
     <xsl:param name="pid">not provided</xsl:param>
     <xsl:param name="datastream">not provided</xsl:param>
@@ -569,10 +579,33 @@
     </xsl:choose>
   </xsl:template>
   
+  <!-- add decade_ms field -->
   <xsl:template name="decades">
     <xsl:variable name="decade" select="substring(normalize-space(child::mods:dateCreated[@encoding='edtf']), 1, 3)"/>
     <field name="utk_mods_dateCreated_decade_ms">
       <xsl:value-of select="concat($decade, '0s')"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add dateIssued_ms field for all dateIssueds -->
+  <xsl:template name="date_issued">
+    <xsl:variable name="normalized-date" select="normalize-space(child::mods:dateIssued)"/>
+    <field name="utk_mods_originInfo_dateIssued_ms">
+      <xsl:value-of select="normalize-space($normalized-date)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add originInfo_date field -->
+  <xsl:template name="basic_date">
+    <field name="utk_mods_originInfo_dateCreated_ms">
+      <xsl:choose>
+        <xsl:when test="child::mods:dateCreated[not(@encoding)]">
+          <xsl:value-of select="child::mods:dateCreated[not(@encoding)]"/>
+        </xsl:when>
+        <xsl:when test="child::mods:dateOther[not(@*)]">
+          <xsl:value-of select="child::mods:dateOther[not(@*)]"/>
+        </xsl:when>
+      </xsl:choose>
     </field>
   </xsl:template>
   
