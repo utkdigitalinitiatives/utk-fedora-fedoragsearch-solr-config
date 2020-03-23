@@ -455,6 +455,10 @@
       <xsl:call-template name="date_issued"/>
     </xsl:if>
     
+    <!-- call templates for mods:dateIssued[@encoding='edtf'] -->
+    
+    <!-- call templates for mods:dateOther[@encoding='edtf'] -->
+    
     <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
       <xsl:call-template name="basic_date"/>
     </xsl:if>
