@@ -550,6 +550,35 @@
         </xsl:choose>
       </xsl:when>
 
+      <!-- 
+        catch dates that look like '2018-05-22' or '2018' or '2018-05'...
+        basically anything that doesn't have a [], or a /, or some other edtf
+        signifier.
+      -->
+      <xsl:when test="not(contains($normalized-date, '~')) or not(contains($normalized-date, 'uU')) or not(contains($normalized-date, '?'))">
+        <xsl:variable name="plain-edtf">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="$normalized-date"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        
+        <!-- sub-choose b/c -->
+        <xsl:choose>
+          <xsl:when test="not(normalize-space($plain-edtf) = '')">
+            <field name="utk_mods_edtf_date_dt">
+              <xsl:value-of select="normalize-space($plain-edtf)"/>
+            </field>
+          </xsl:when>
+          <xsl:otherwise>
+            <field name="utk_mods_edtf_date_fallback_s">
+              <xsl:value-of select="normalize-space($plain-edtf)"/>
+            </field>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+
       <!-- unknown date patterns -->
       <xsl:when test="contains($normalized-date, '~') or contains($normalized-date, 'uU') or contains($normalized-date, '?')">
         <xsl:variable name="uncertainty-patterns">
