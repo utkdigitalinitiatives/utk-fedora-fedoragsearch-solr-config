@@ -441,6 +441,18 @@
     <xsl:param name="datastream"/>
     
     <!-- call templates for mods:dateCreatd[@encoding='edtf'][@point] -->
+    <xsl:if test="child::mods:dateCreated[@encoding='edtf'][@point='start']">
+      <xsl:call-template name="edtf_point_start">
+        <xsl:with-param name="pid"/>
+        <xsl:with-param name="datastream"/>
+      </xsl:call-template>  
+    </xsl:if>
+    <xsl:if test="child::mods:dateCreated[@encoding='edtf'][@point='end']">
+      <xsl:call-template name="edtf_point_end">
+        <xsl:with-param name="pid"/>
+        <xsl:with-param name="datastream"/>
+      </xsl:call-template> 
+    </xsl:if>
     
     <!-- call templates for mods:dateCreated[@encoding='edtf'] -->
     <xsl:if test="child::mods:dateCreated[@encoding='edtf']">
@@ -464,6 +476,60 @@
     <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
       <xsl:call-template name="basic_date"/>
     </xsl:if>
+  </xsl:template>
+  
+  <!-- process mods:dateCreated[@encoding='edtf'][@point='start'] -->
+  <xsl:template name="edtf_point_start">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    
+    <xsl:variable name="point_start">
+      <xsl:call-template name="get_ISO8601_date">
+        <xsl:with-param name="date" select="child::mods:dateCreated[@encoding='edtf'][@point='start']"/>
+        <xsl:with-param name="pid" select="$pid"/>
+        <xsl:with-param name="datastream" select="$datastream"/>
+      </xsl:call-template>
+    </xsl:variable>
+    
+    <xsl:choose>
+      <xsl:when test="not(normalize-space($point_start)='')">
+        <field name="utk_mods_originInfo_dateCreated_edtf_point_start_dt">
+          <xsl:value-of select="normalize-space($point_start)"/>
+        </field>
+      </xsl:when>
+      <xsl:otherwise>
+        <field name="utk_mods_originInfo_dateCreated_edtf_point_start_fallback_s">
+          <xsl:value-of select="normalize-space($point_start)"/>
+        </field>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!-- process mods:dateCreated[@encoding='edtf'][@point='end'] -->
+  <xsl:template name="edtf_point_end">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    
+    <xsl:variable name="point_end">
+      <xsl:call-template name="get_ISO8601_date">
+        <xsl:with-param name="date" select="child::mods:dateCreated[@encoding='edtf'][@point='end']"/>
+        <xsl:with-param name="pid" select="$pid"/>
+        <xsl:with-param name="datastream" select="$datastream"/>
+      </xsl:call-template>
+    </xsl:variable>
+    
+    <xsl:choose>
+      <xsl:when test="not(normalize-space($point_end)='')">
+        <field name="utk_mods_originInfo_dateCreated_edtf_point_end_dt">
+          <xsl:value-of select="normalize-space($point_end)"/>
+        </field>
+      </xsl:when>
+      <xsl:otherwise>
+        <field name="utk_mods_originInfo_dateCreated_edtf_point_end_fallback_s">
+          <xsl:value-of select="normalize-space($point_end)"/>
+        </field>
+      </xsl:otherwise>
+    </xsl:choose>  
   </xsl:template>
   
   <!-- process mods:dateCreated[@encoding='edtf'] -->
