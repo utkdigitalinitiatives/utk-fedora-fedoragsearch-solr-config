@@ -434,7 +434,14 @@
       <xsl:value-of select="normalize-space(.)"/>
     </field>
   </xsl:template>
-
+  
+  <!-- refactor _ms date fields back in to the utk_MODS mode -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateIssued[not(@encoding)]" mode="utk_MODS">
+    <field name="utk_mods_originInfo_dateIssued_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
   <!-- try to refactor all of the mods:mods/mods:originInfo/mods:date* handling to one template -->
   <xsl:template match="mods:mods/mods:originInfo" mode="utk_MODS_dates">
     <xsl:param name="pid"/>
@@ -464,11 +471,6 @@
       <xsl:call-template name="decades"/>
     </xsl:if>
     
-    <!-- call templates for mods:dateIssued -->
-    <xsl:if test="child::mods:dateIssued">
-      <xsl:call-template name="date_issued"/>
-    </xsl:if>
-    
     <!-- call templates for mods:dateIssued[@encoding='edtf'] -->
     <xsl:if test="child::mods:dateIssued[@encoding='edtf']">
       <xsl:call-template name="date_issued_edtf">
@@ -478,6 +480,12 @@
     </xsl:if>
     
     <!-- call templates for mods:dateOther[@encoding='edtf'] -->
+    <xsl:if test="child::mods:dateOther[@encoding='edtf']">
+      <xsl:call-template name="date_other_edtf">
+        <xsl:with-param name="pid"/>
+        <xsl:with-param name="datastream"/>
+      </xsl:call-template>
+    </xsl:if>
     
     <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
       <xsl:call-template name="basic_date"/>
@@ -694,14 +702,6 @@
     </field>
   </xsl:template>
   
-  <!-- add dateIssued_ms field for all dateIssueds -->
-  <xsl:template name="date_issued">
-    <xsl:variable name="normalized-date" select="normalize-space(child::mods:dateIssued)"/>
-    <field name="utk_mods_originInfo_dateIssued_ms">
-      <xsl:value-of select="normalize-space($normalized-date)"/>
-    </field>
-  </xsl:template>
-  
   <!-- process dateIssued[@encoding='edtf'] -->
   <xsl:template name="date_issued_edtf">
     <xsl:param name="pid">not provided</xsl:param>
@@ -727,6 +727,17 @@
         </field>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+  
+  <!-- process dateOther[@encoding='edtf'] -->
+  <xsl:template name="date_other_edtf">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    
+    <!-- 
+      refactor this into the main edtf? 
+      leave it separate?
+    -->
   </xsl:template>
   
   <!-- add originInfo_date field -->
