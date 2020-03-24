@@ -498,15 +498,15 @@
             otherwise creating an _edtf_range_fallback_s field.
           -->
           <xsl:when test="not(normalize-space($date-range-start)='') and not(normalize-space($date-range-end)='')">
-            <field name="utk_mods_edtf_range_start_dt">
+            <field name="utk_mods_originInfo_dateCreated_edtf_range_start_dt">
               <xsl:value-of select="normalize-space($date-range-start)"/>
             </field>
-            <field name="utk_mods_edtf_range_end_dt">
+            <field name="utk_mods_originInfo_dateCreated_edtf_range_end_dt">
               <xsl:value-of select="normalize-space($date-range-end)"/>
             </field>
           </xsl:when>
           <xsl:otherwise>
-            <field name="utk_mods_edtf_range_fallback_s">
+            <field name="utk_mods_originInfo_dateCreated_edtf_range_fallback_s">
               <xsl:value-of select="normalize-space($normalized-date)"/>
             </field>
           </xsl:otherwise>
