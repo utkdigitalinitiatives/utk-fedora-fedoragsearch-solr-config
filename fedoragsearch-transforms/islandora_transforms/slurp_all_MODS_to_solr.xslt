@@ -470,6 +470,12 @@
     </xsl:if>
     
     <!-- call templates for mods:dateIssued[@encoding='edtf'] -->
+    <xsl:if test="child::mods:dateIssued[@encoding='edtf']">
+      <xsl:call-template name="date_issued_edtf">
+        <xsl:with-param name="pid"/>
+        <xsl:with-param name="datastream"/>
+      </xsl:call-template>
+    </xsl:if>
     
     <!-- call templates for mods:dateOther[@encoding='edtf'] -->
     
@@ -694,6 +700,33 @@
     <field name="utk_mods_originInfo_dateIssued_ms">
       <xsl:value-of select="normalize-space($normalized-date)"/>
     </field>
+  </xsl:template>
+  
+  <!-- process dateIssued[@encoding='edtf'] -->
+  <xsl:template name="date_issued_edtf">
+    <xsl:param name="pid">not provided</xsl:param>
+    <xsl:param name="datastream">not provided</xsl:param>
+    
+    <xsl:variable name="edtf-date">
+      <xsl:call-template name="get_ISO8601_date">
+        <xsl:with-param name="date" select="child::mods:dateIssued[@encoding='edtf']"/>
+        <xsl:with-param name="pid" select="$pid"/>
+        <xsl:with-param name="datastream" select="$datastream"/>
+      </xsl:call-template>
+    </xsl:variable>
+    
+    <xsl:choose>
+      <xsl:when test="not(normalize-space($edtf-date)='')">
+        <field name="utk_mods_originInfo_dateIssued_edtf_dt">
+          <xsl:value-of select="normalize-space($edtf-date)"/>
+        </field>
+      </xsl:when>
+      <xsl:otherwise>
+        <field name="utk_mods_originInfo_dateIssued_edtf_fallback_s">
+          <xsl:value-of select="normalize-space($edtf-date)"/>
+        </field>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- add originInfo_date field -->
