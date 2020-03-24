@@ -440,6 +440,8 @@
     <xsl:param name="pid"/>
     <xsl:param name="datastream"/>
     
+    <!-- call templates for mods:dateCreatd[@encoding='edtf'][@point] -->
+    
     <!-- call templates for mods:dateCreated[@encoding='edtf'] -->
     <xsl:if test="child::mods:dateCreated[@encoding='edtf']">
       <xsl:call-template name="edtf">
@@ -539,15 +541,15 @@
             otherwise creating an _edtf_range_fallback_s field.
           -->
           <xsl:when test="not(normalize-space($date-range-start) = '') and not(normalize-space($date-range-end) = '')">
-            <field name="utk_mods_edtf_range_start_dt">
+            <field name="utk_mods_originInfo_dateCreated_edtf_range_start_dt">
               <xsl:value-of select="normalize-space($date-range-start)"/>
             </field>
-            <field name="utk_mods_edtf_range_end_dt">
+            <field name="utk_mods_originInfo_dateCreated_edtf_range_end_dt">
               <xsl:value-of select="normalize-space($date-range-end)"/>
             </field>
           </xsl:when>
           <xsl:otherwise>
-            <field name="utk_mods_edtf_range_fallback_s">
+            <field name="utk_mods_originInfo_dateCreated_edtf_range_fallback_s">
               <xsl:value-of select="normalize-space($normalized-date)"/>
             </field>
           </xsl:otherwise>
@@ -571,12 +573,12 @@
         <!-- sub-choose b/c -->
         <xsl:choose>
           <xsl:when test="not(normalize-space($plain-edtf) = '')">
-            <field name="utk_mods_edtf_date_dt">
+            <field name="utk_mods_originInfo_dateCreated_edtf_date_dt">
               <xsl:value-of select="normalize-space($plain-edtf)"/>
             </field>
           </xsl:when>
           <xsl:otherwise>
-            <field name="utk_mods_edtf_date_fallback_s">
+            <field name="utk_mods_originInfo_dateCreated_edtf_date_fallback_s">
               <xsl:value-of select="normalize-space($plain-edtf)"/>
             </field>
           </xsl:otherwise>
@@ -596,7 +598,7 @@
         <!-- sub-choose, b/c -->
         <xsl:choose>
           <xsl:when test="not(normalize-space($uncertainty-patterns) = '')">
-            <field name="utk_mods_edtf_uncertain_date_dt">
+            <field name="utk_mods_originInfo_dateCreated_edtf_uncertain_date_dt">
               <xsl:value-of select="normalize-space($uncertainty-patterns)"/>
             </field>
           </xsl:when>
@@ -605,7 +607,7 @@
     
       <!-- closing otherwise -->
       <xsl:otherwise>
-        <field name="utk_mods_edtf_otherwise_s">
+        <field name="utk_mods_originInfo_dateCreated_edtf_otherwise_s">
           <xsl:value-of select="normalize-space($normalized-date)"/>
         </field>
       </xsl:otherwise>
@@ -615,7 +617,7 @@
   <!-- add decade_ms field -->
   <xsl:template name="decades">
     <xsl:variable name="decade" select="substring(normalize-space(child::mods:dateCreated[@encoding='edtf']), 1, 3)"/>
-    <field name="utk_mods_dateCreated_decade_ms">
+    <field name="utk_mods_originInfo_dateCreated_decade_ms">
       <xsl:value-of select="concat($decade, '0s')"/>
     </field>
   </xsl:template>
