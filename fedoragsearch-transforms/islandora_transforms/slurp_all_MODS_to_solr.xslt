@@ -450,7 +450,7 @@
     </field>
   </xsl:template>
   
-  <!-- try to refactor all of the mods:mods/mods:originInfo/mods:date* handling to one template -->
+  <!-- try to refactor all of the mods:mods/mods:originInfo/mods:date* _dt handling to one template -->
   <xsl:template match="mods:mods/mods:originInfo" mode="utk_MODS_dates">
     <xsl:param name="pid"/>
     <xsl:param name="datastream"/>
