@@ -450,6 +450,14 @@
     </field>
   </xsl:template>
   
+  <!-- add _decade_ms -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
+    <xsl:variable name="decade" select="substring(., 1, 3)"/>
+    <field name="utk_mods_dateCreated_decade_ms">
+      <xsl:value-of select="concat($decade, '0s')"/>
+    </field>
+  </xsl:template>
+  
   <!-- try to refactor all of the mods:mods/mods:originInfo/mods:date* _dt handling to one template -->
   <xsl:template match="mods:mods/mods:originInfo" mode="utk_MODS_dates">
     <xsl:param name="pid"/>
@@ -476,7 +484,6 @@
         <xsl:with-param name="datastream"/>
       </xsl:call-template>
       
-      <xsl:call-template name="decades"/>
     </xsl:if>
     
     <!-- call templates for mods:dateIssued[@encoding='edtf'] -->
@@ -697,14 +704,6 @@
         </field>
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:template>
-  
-  <!-- add decade_ms field -->
-  <xsl:template name="decades">
-    <xsl:variable name="decade" select="substring(normalize-space(child::mods:dateCreated[@encoding='edtf']), 1, 3)"/>
-    <field name="utk_mods_originInfo_dateCreated_decade_ms">
-      <xsl:value-of select="concat($decade, '0s')"/>
-    </field>
   </xsl:template>
   
   <!-- process dateIssued[@encoding='edtf'] -->
