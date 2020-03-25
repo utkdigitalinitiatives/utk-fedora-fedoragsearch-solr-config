@@ -589,7 +589,7 @@
         <xsl:choose>
           <!-- 
             this sub-choose creates _edtf_range_start and edtf_range_end _dt fields,
-            otherwise creating an _edtf_range_fallback_s field.
+            otherwise creating a _feedback_ms field.
           -->
           <xsl:when test="not(normalize-space($date-range-start)='') and not(normalize-space($date-range-end)='')">
             <field name="utk_mods_originInfo_dateCreated_edtf_range_start_dt">
@@ -731,8 +731,8 @@
         </field>
       </xsl:when>
       <xsl:otherwise>
-        <field name="utk_mods_originInfo_dateIssued_edtf_fallback_s">
-          <xsl:value-of select="normalize-space($edtf-date)"/>
+        <field name="utk_mods_date_feedback_ms">
+          <xsl:value-of select="concat('date_issued_edtf: ', $edtf-date)"/>
         </field>
       </xsl:otherwise>
     </xsl:choose>
@@ -743,10 +743,73 @@
     <xsl:param name="pid">not provided</xsl:param>
     <xsl:param name="datastream">not provided</xsl:param>
     
-    <!-- 
-      refactor this into the main edtf? 
-      leave it separate?
-    -->
+    <xsl:variable name="normalized-date" select="normalize-space(child::mods:dateOther[@encoding='edtf'])"/>
+    
+    <xsl:choose>
+      <!-- 
+        it appears that we only need to be concerned with '/' in our dateOthers
+      -->
+      <xsl:when test="contains($normalized-date, '/')">
+        <xsl:variable name="date-range-start">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="substring-before($normalized-date, '/')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="date-range-end">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="substring-after($normalized-date, '/')"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+      
+        <!-- sub-choose b/c -->
+        <xsl:choose>
+          <!--
+            this sub-choose creates _edtf_range_start and _edtf_range_end fields,
+            otherwise creating a _feedback_ms field.
+          -->
+          <xsl:when test="not(normalize-space($date-range-start)='') and not(normalize-space($date-range-end)='')">
+            <field name="utk_mods_originInfo_dateOther_edtf_range_start_dt">
+              <xsl:value-of select="normalize-space($date-range-start)"/>
+            </field>
+            <field name="utk_mods_originInfo_dateOther_edtf_range_end_dt">
+              <xsl:value-of select="normalize-space($date-range-end)"/>
+            </field>
+          </xsl:when>
+          <xsl:otherwise>
+            <field name="utk_mods_date_feedback_ms">
+              <xsl:value-of select="concat('date_other_edtf: ', $normalized-date)"/>
+            </field>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      
+      <xsl:otherwise>
+        <xsl:variable name="date-other-simple">
+          <xsl:call-template name="get_ISO8601_date">
+            <xsl:with-param name="date" select="$normalized-date"/>
+            <xsl:with-param name="pid" select="$pid"/>
+            <xsl:with-param name="datastream" select="$datastream"/>
+          </xsl:call-template>
+        </xsl:variable>
+        
+        <xsl:choose>
+          <xsl:when test="not(normalize-space($date-other-simple)='')">
+            <field name="utk_mods_originInfo_dateOther_edft_dt">
+              <xsl:value-of select="normalize-space($date-other-simple)"/>
+            </field>
+          </xsl:when>
+          <xsl:otherwise>
+            <field name="utk_mods_date_feedback_ms">
+              <xsl:value-of select="concat('date_other_simple: ', $normalized-date)"/>
+            </field>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template name="get_ISO8601_date">
