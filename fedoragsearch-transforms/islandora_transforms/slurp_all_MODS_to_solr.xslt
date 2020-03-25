@@ -436,9 +436,17 @@
   </xsl:template>
   
   <!-- refactor _ms date fields back in to the utk_MODS mode -->
+  <!-- add _dateIssued_ms -->
   <xsl:template match="mods:mods/mods:originInfo/mods:dateIssued[not(@encoding)]" mode="utk_MODS">
     <field name="utk_mods_originInfo_dateIssued_ms">
       <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add _originInfo_date_ms -->
+  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated[not(@encoding)] or mods:dateOther[not(@encoding)]]" mode="utk_MODS">
+    <field name="utk_mods_originInfo_date_ms">
+      <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')][not(@encoding)]"/>
     </field>
   </xsl:template>
   
@@ -487,9 +495,6 @@
       </xsl:call-template>
     </xsl:if>
     
-    <xsl:if test="child::mods:dateCreated[not(@encoding)] or child::mods:dateOther">
-      <xsl:call-template name="basic_date"/>
-    </xsl:if>
   </xsl:template>
   
   <!-- process mods:dateCreated[@encoding='edtf'][@point='start'] -->
@@ -738,20 +743,6 @@
       refactor this into the main edtf? 
       leave it separate?
     -->
-  </xsl:template>
-  
-  <!-- add originInfo_date field -->
-  <xsl:template name="basic_date">
-    <field name="utk_mods_originInfo_dateCreated_ms">
-      <xsl:choose>
-        <xsl:when test="child::mods:dateCreated[not(@encoding)]">
-          <xsl:value-of select="child::mods:dateCreated[not(@encoding)]"/>
-        </xsl:when>
-        <xsl:when test="child::mods:dateOther[not(@*)]">
-          <xsl:value-of select="child::mods:dateOther[not(@*)]"/>
-        </xsl:when>
-      </xsl:choose>
-    </field>
   </xsl:template>
   
   <xsl:template name="get_ISO8601_date">
