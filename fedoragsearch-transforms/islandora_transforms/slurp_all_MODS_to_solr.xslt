@@ -524,8 +524,8 @@
         </field>
       </xsl:when>
       <xsl:otherwise>
-        <field name="utk_mods_originInfo_dateCreated_edtf_point_start_fallback_s">
-          <xsl:value-of select="normalize-space($point_start)"/>
+        <field name="utk_mods_date_feedback_ms">
+          <xsl:value-of select="concat('edtf_point_start: ', $point_start)"/>
         </field>
       </xsl:otherwise>
     </xsl:choose>
@@ -551,8 +551,8 @@
         </field>
       </xsl:when>
       <xsl:otherwise>
-        <field name="utk_mods_originInfo_dateCreated_edtf_point_end_fallback_s">
-          <xsl:value-of select="normalize-space($point_end)"/>
+        <field name="utk_mods_date_feedback_ms">
+          <xsl:value-of select="concat('edtf_point_end', $point_end)"/>
         </field>
       </xsl:otherwise>
     </xsl:choose>  
@@ -600,8 +600,8 @@
             </field>
           </xsl:when>
           <xsl:otherwise>
-            <field name="utk_mods_originInfo_dateCreated_edtf_range_fallback_s">
-              <xsl:value-of select="normalize-space($normalized-date)"/>
+            <field name="utk_mods_date_feedback_ms">
+              <xsl:value-of select="concat('edtf_date_range_1: ', $normalized-date)"/>
             </field>
           </xsl:otherwise>
         </xsl:choose>
@@ -641,8 +641,8 @@
             </field>
           </xsl:when>
           <xsl:otherwise>
-            <field name="utk_mods_originInfo_dateCreated_edtf_range_fallback_s">
-              <xsl:value-of select="normalize-space($normalized-date)"/>
+            <field name="utk_mods_date_feedback_ms">
+              <xsl:value-of select="concat('edtf_date_range_2: ', $normalized-date)"/>
             </field>
           </xsl:otherwise>
         </xsl:choose>
@@ -670,8 +670,8 @@
             </field>
           </xsl:when>
           <xsl:otherwise>
-            <field name="utk_mods_originInfo_dateCreated_edtf_date_fallback_s">
-              <xsl:value-of select="normalize-space($plain-edtf)"/>
+            <field name="utk_mods_date_feedback_ms">
+              <xsl:value-of select="concat('plain_edtf: ', $normalized-date)"/>
             </field>
           </xsl:otherwise>
         </xsl:choose>
@@ -694,12 +694,17 @@
               <xsl:value-of select="normalize-space($uncertainty-patterns)"/>
             </field>
           </xsl:when>
+          <xsl:otherwise>
+            <field name="utk_mods_date_feedback_ms">
+              <xsl:value-of select="concat('uncertainty_patterns: ', $normalized-date)"/>
+            </field>
+          </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
     
       <!-- closing otherwise -->
       <xsl:otherwise>
-        <field name="utk_mods_originInfo_dateCreated_edtf_otherwise_s">
+        <field name="utk_mods_originInfo_dateCreated_edtf_otherwise_ms">
           <xsl:value-of select="normalize-space($normalized-date)"/>
         </field>
       </xsl:otherwise>
