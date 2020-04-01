@@ -826,6 +826,40 @@
     <xsl:param name="pid">not provided</xsl:param>
     <xsl:param name="datastream">not provided</xsl:param>
     
+    <!-- modifying the EDTF template for level 2 date shorthands -->
+    <xsl:variable name="seasonal-dates">
+      <xsl:choose>
+        <xsl:when test="$date = ''"/>
+        <!-- matches YYYY-21 (= spring or `-03-21`) -->
+        <xsl:when test="string-length(translate(substring($date, 1, 4), $digits, '')) = 0
+                        and substring($date, 5, 1) = '-'
+                        and substring($date, 6, 2) = 21">
+          <xsl:value-of select="concat(substring($date, 1, 4), '-03-21')"/>
+        </xsl:when>
+        <!-- matches YYYY-22 (= summer or `-06-21`) -->
+        <xsl:when test="string-length(translate(substring($date, 1, 4), $digits, '')) = 0
+                        and substring($date, 5, 1) = '-'
+                        and substring($date, 6, 2) = 22">
+          <xsl:value-of select="concat(substring($date, 1, 4), '-06-21')"/>
+        </xsl:when>
+        <!-- matches YYYY-23 (= autumn or `-09-21`) -->
+        <xsl:when test="string-length(translate(substring($date, 1, 4), $digits, '')) = 0
+                        and substring($date, 5, 1) = '-'
+                        and substring($date, 6, 2) = 23">
+          <xsl:value-of select="concat(substring($date, 1, 4), '-09-21')"/>
+        </xsl:when>
+        <!-- matches YYYY-24 (= winter or `-12-21`) -->
+        <xsl:when test="string-length(translate(substring($date, 1, 4), $digits, '')) = 0
+                        and substring($date, 5, 1) = '-'
+                        and substring($date, 6, 2) = 24">
+          <xsl:value-of select="concat(substring($date, 1, 4), '-12-21')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$date"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    
     <!-- EDTF stores unknown numbers as 'u' or 'U'; normalizing to 0. -->
     <!-- Only regard the portion of the date before a '/', as this indicates a
          range we wish to round down. -->
@@ -855,7 +889,7 @@
       </xsl:choose>
     </xsl:variable>
     
-    <xsl:value-of select="java:ca.discoverygarden.gsearch_extensions.JodaAdapter.transformForSolr($date_prefix, $pid, $datastream)"/>
+    <xsl:value-of select="java:ca.discoverygarden.gsearch_extensions.JodaAdapter.transformForSolr($seasonal-dates, $pid, $datastream)"/>
     
   </xsl:template>
   
