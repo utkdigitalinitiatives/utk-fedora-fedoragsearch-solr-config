@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+   <identifier type="local">colloquy.7.2</identifier>
+   <titleInfo>
+      <title>Great Smoky Mountains Colloquy: 
+            Volume 7, Number 2</title>
+   </titleInfo>
+   <titleInfo type="alternative" displayLabel="Also known as">
+      <title>Colloquy</title>
+   </titleInfo>
+   <part>
+      <detail type="volume and issue">
+         <number>Volume 7, Number 2</number>
+      </detail>
+   </part>
+   <originInfo>
+      <dateCreated encoding="edtf" keyDate="yes" point="start">
+2006-23
+</dateCreated>
+   </originInfo>
+   <abstract>
+This issue includes articles about ethnologist James 
+Mooney and his study of the Eastern Band of Cherokee Indians; origins of the naming of Cades Cove and Abrams Creek; review of Charles Frazier's "Thirteen Moons"; and website updates. 
+</abstract>
+   <physicalDescription>
+      <extent unit="pages">4</extent>
+      <form authority="aat" valueURI="http://vocab.getty.edu/aat/300026652">
+newsletters</form>
+      <internetMediaType>application/pdf</internetMediaType>
+      <internetMediaType>application/pdf</internetMediaType>
+   </physicalDescription>
+   <location>
+      <physicalLocation>University of Tennessee Knoxville. Special Collections. 
+</physicalLocation>
+   </location>
+   <language>
+      <languageTerm type="code" authority="iso639-2b">eng
+</languageTerm>
+   </language>
+   <relatedItem displayLabel="Project" type="host">
+      <location>
+         <url>https://digital.lib.utk.edu/collections/colloquy
+</url>
+      </location>
+      <titleInfo>
+         <title>Great Smoky Mountains Colloquy</title>
+      </titleInfo>
+   </relatedItem>
+   <accessCondition type="use and reproduction"
+                    xlink:href="http://rightsstatements.org/vocab/InC/1.0/">
+            In Copyright
+        </accessCondition>
+   <name authority="lcna"
+         valueURI="http://id.loc.gov/authorities/names/n95109439">
+      <namePart>Wise, Ken</namePart>
+      <role>
+         <roleTerm authority="marcrelator"
+                   valueURI="http://id.loc.gov/vocabulary/relators/edt.html"> Editor</roleTerm>
+      </role>
+   </name>
+   <name authority="lcna"
+         valueURI="http://id.loc.gov/authorities/names/n88651816">
+      <namePart>Bridges, Anne</namePart>
+      <role>
+         <roleTerm authority="marcrelator"
+                   valueURI="http://id.loc.gov/vocabulary/relators/edt.html"> Editor</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>Clement, Russ</namePart>
+      <role>
+         <roleTerm> Editor</roleTerm>
+      </role>
+   </name>
+   <subject>
+      <name authority="lcna"
+            valueURI="http://id.loc.gov/authorities/names/n50004264">
+         <namePart>Mooney, James, 1861-1921</namePart>
+      </name>
+   </subject>
+   <subject>
+      <name authority="lcna"
+            valueURI="http://id.loc.gov/authorities/names/n50024398">
+         <namePart>Eastern Band of Cherokee Indians</namePart>
+      </name>
+   </subject>
+   <subject>
+      <geographic authority="geonames"
+                  valueURI="http://sws.geonames.org/4626066/about.rdf">Great Smoky Mountains</geographic>
+      <cartographics>
+         <coordinates>35.58343, -83.50822</coordinates>
+      </cartographics>
+   </subject>
+   <subject>
+      <geographic authority="geonames"
+                  valueURI="http://sws.geonames.org/4610416/about.rdf">Cades Cove</geographic>
+      <cartographics>
+         <coordinates>35.60591, -83.78128</coordinates>
+      </cartographics>
+   </subject>
+   <recordInfo>
+      <recordContentSource>University of Tennessee, Knoxville. Libraries</recordContentSource>
+   </recordInfo>
+</mods>

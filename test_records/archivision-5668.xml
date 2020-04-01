@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+   <identifier type="filename">arc5964</identifier>
+   <identifier type="pid">archivision:5668</identifier>
+   <identifier type="Work ID">2144577327</identifier>
+   <identifier type="Vendor ID">1A2-C-H-AG-A2</identifier>
+   <titleInfo>
+      <title>Art Gallery of Nova Scotia</title>
+   </titleInfo>
+   <abstract>South elevation, view looking up the center</abstract>
+   <originInfo>
+      <publisher>Archivision, Inc.</publisher>
+      <dateCreated>1867; renovated 1985</dateCreated>
+      <dateCreated encoding="edtf" keyDate="yes">1867</dateCreated>
+      <dateOther encoding="edtf">1985</dateOther>
+   </originInfo>
+   <physicalDescription>
+      <form authority="aat" valueURI="http://vocab.getty.edu/aat/300265418">built works</form>
+      <form type="material">stone: sandstone</form>
+      <digitalOrigin>reformatted digital</digitalOrigin>
+   </physicalDescription>
+   <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300021464">Renaissance Revival</genre>
+   <subject authority="lcsh"
+            valueURI="http://id.loc.gov/authorities/subjects/sh2006008793">
+      <topic>Male artists</topic>
+   </subject>
+   <subject>
+      <geographic authority="geonames" valueURI="http://sws.geonames.org/6324729">Halifax</geographic>
+      <cartographics>
+         <coordinates>44.64533, -63.57239</coordinates>
+      </cartographics>
+   </subject>
+   <name type="personal" authority="Grove">
+      <namePart>Stirling, David</namePart>
+      <displayForm>David Stirling</displayForm>
+      <namePart type="date">1822-1887</namePart>
+      <description>Canadian</description>
+      <role>
+         <roleTerm type="text"
+                   authority="marcrelator"
+                   valueURI="http://id.loc.gov/vocabulary/relators/cre">Creator</roleTerm>
+      </role>
+   </name>
+   <name type="corporate">
+      <namePart>Lydon Lynch Architects</namePart>
+      <displayForm>Lydon Lynch Architects</displayForm>
+      <namePart type="date">1979-</namePart>
+      <description>Canadian</description>
+      <role>
+         <roleTerm type="text"
+                   authority="marcrelator"
+                   valueURI="ttp://id.loc.gov/vocabulary/relators/cre">Creator</roleTerm>
+      </role>
+   </name>
+   <relatedItem displayLabel="Project" type="host">
+      <titleInfo>
+         <title>Archivision</title>
+      </titleInfo>
+   </relatedItem>
+   <recordInfo>
+      <recordContentSource valueURI="http://id.loc.gov/authorities/names/n87808088">University of Tennessee, Knoxville. Libraries</recordContentSource>
+      <languageOfCataloging>
+         <languageTerm type="code" authority="iso639-2b">eng</languageTerm>
+      </languageOfCataloging>
+   </recordInfo>
+   <typeOfResource>still image</typeOfResource>
+   <accessCondition type="use and reproduction"
+                    xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
+   <name>
+      <namePart>Gilchrist, Scott</namePart>
+      <role>
+         <roleTerm authority="marcrelator"
+                   valueURI="http://id.loc.gov/vocabulary/relators/cph">Copyright holder</roleTerm>
+      </role>
+   </name>
+</mods>

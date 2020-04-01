@@ -1,0 +1,73 @@
+
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <identifier type="local">0012_003979_000400</identifier>
+  <identifier type="pid">vanvactor:10487</identifier>
+  <titleInfo supplied="yes">
+    <title>Sketches for Symphony no. 6</title>
+  </titleInfo>
+  <abstract>Compilation of pencil and pen sketches. Associated names and phone numbers inscribed in sketches. All instrumentation is not defined.</abstract>
+  <note type="instrumentation">For English horn, clarinet, alto saxophone, horn, trumpet, percussion, and violin.</note>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015251">English horn</genre>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015154">clarinet</genre>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015015">alto saxophone</genre>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015342">horn</genre>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015748">trumpet</genre>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015218">drum</genre>
+  <genre authority="lcmpt" valueURI="http://id.loc.gov/authorities/performanceMediums/mp2013015782">violin</genre>
+  <originInfo>
+    <dateCreated qualifier="approximate">1979-1980</dateCreated>
+    <dateCreated encoding="edtf" keyDate="yes" point="start" qualifier="approximate">1979</dateCreated>
+    <dateCreated encoding="edtf" point="end" qualifier="approximate">1980</dateCreated>
+  </originInfo>
+  <physicalDescription>
+    <form authority="aat" valueURI="http://vocab.getty.edu/aat/300026427">scores (documents for music)</form>
+    <extent>94 pages</extent>
+    <internetMediaType>pdf</internetMediaType>
+  </physicalDescription>
+  <name valueURI="http://id.loc.gov/authorities/names/n82001311">
+    <namePart>Van Vactor, David, 1906-1994</namePart>
+    <role>
+      <roleTerm authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/cmp">Composer</roleTerm>
+    </role>
+  </name>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85131473">
+    <topic>Symphonies</topic>
+  </subject>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85088803">
+    <topic>Music--Manuscripts</topic>
+  </subject>
+  <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014027121">Symphonies</genre>
+  <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014026097">Excerpts</genre>
+  <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014026956">Musical sketches</genre>
+  <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/subjects/sh99001779">Scores</genre>
+  <relatedItem type="otherVersion">
+    <titleInfo>
+      <title>Symphony no. 6</title>
+    </titleInfo>
+    <identifier type="catalog">M118</identifier>
+  </relatedItem>
+  <note type="handwritten">2-15-79 1816 Bedford</note>
+  <note type="handwritten">(4th sketch) S. Bedford. Sat 12 -</note>
+  <typeOfResource>notated music</typeOfResource>
+  <relatedItem displayLabel="Project" type="host">
+    <titleInfo>
+      <title>David Van Vactor Music Collection</title>
+    </titleInfo>
+  </relatedItem>
+  <relatedItem displayLabel="Collection" type="host">
+    <titleInfo>
+      <title>David Van Vactor Papers</title>
+    </titleInfo>
+    <identifier>MS.1942</identifier>
+    <location>
+      <url>https://n2t.net/ark:/87290/v8pz5703</url>
+    </location>
+  </relatedItem>
+  <location>
+    <physicalLocation valueURI="http://id.loc.gov/authorities/names/no2014027633">University of Tennessee, Knoxville. Special Collections</physicalLocation>
+  </location>
+  <recordInfo>
+    <recordContentSource valueURI="http://id.loc.gov/authorities/names/n87808088">University of Tennessee, Knoxville. Libraries</recordContentSource>
+  </recordInfo>
+  <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
+</mods>

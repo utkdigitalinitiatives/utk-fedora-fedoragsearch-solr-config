@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+   <identifier type="local">0012_003049_000252</identifier>
+   <titleInfo>
+      <title>Summer and Smoke</title>
+   </titleInfo>
+   <abstract>Playbill, March 8-13, 1954, The Carousel Theatre, Directed by Russell Green</abstract>
+   <originInfo>
+      <dateIssued>Mar 8, 1954</dateIssued>
+      <dateIssued encoding="edtf">1954-03-08</dateIssued>
+      <dateOther encoding="edtf">1953/1954</dateOther>
+      <place>
+         <placeTerm valueURI="http://id.loc.gov/authorities/names/n80003889">University of Tennessee, Knoxville</placeTerm>
+      </place>
+      <publisher>University of Tennessee Theatre Department </publisher>
+   </originInfo>
+   <relatedItem displayLabel="Project" type="host">
+      <titleInfo>
+         <title>The University of Tennessee Theatre Playbills Collection</title>
+      </titleInfo>
+   </relatedItem>
+   <name valueURI="http://id.loc.gov/authorities/names/n79090096" authority="naf">
+      <namePart>Williams, Tennessee, 1911-1983</namePart>
+      <role>
+         <roleTerm authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/ctb">Contributor</roleTerm>
+      </role>
+   </name>
+   <name valueURI="http://id.loc.gov/authorities/names/no2017158092" authority="naf">
+      <namePart>Green, Russell E.</namePart>
+      <role>
+         <roleTerm authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/sgd">Stage director</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>Carousel Theatre</namePart>
+      <role>
+         <roleTerm authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/prn">Production company</roleTerm>
+      </role>
+   </name>
+   <subject>
+      <topic valueURI="http://id.loc.gov/authorities/subjects/sh85008007">Art in universities and colleges</topic>
+   </subject>
+   <subject>
+      <topic valueURI="http://id.loc.gov/authorities/subjects/sh85134577">Theater programs</topic>
+   </subject>
+   <subject>
+      <topic valueURI="http://id.loc.gov/authorities/subjects/sh85028396">College theater </topic>
+   </subject>
+   <subject>
+      <geographic>Ula Love Doughty Carousel Theatre</geographic>
+   </subject>
+   <physicalDescription>
+      <form authority="aat" valueURI="http://vocab.getty.edu/aat/300027216">playbills</form>
+      <internetMediaType>image/jpeg</internetMediaType>
+   </physicalDescription>
+   <typeOfResource>text</typeOfResource>
+   <typeOfResource>still image</typeOfResource>
+   <language>
+      <languageTerm type="code" authority="iso639-2b">eng</languageTerm>
+   </language>
+   <relatedItem displayLabel="Collection" type="host">
+      <titleInfo>
+         <title>University of Tennessee Theatre Collection</title>
+      </titleInfo>
+      <identifier>AR.0235</identifier>
+      <location>
+         <url>http://n2t.net/ark:/87290/v81r6npf</url>
+      </location>
+   </relatedItem>
+   <location>
+      <physicalLocation valueURI="http://id.loc.gov/authorities/names/no2014027633">University of Tennessee, Knoxville. Special Collections</physicalLocation>
+   </location>
+   <recordInfo>
+      <recordContentSource valueURI="http://id.loc.gov/authorities/names/n87808088">University of Tennessee, Knoxville. Libraries</recordContentSource>
+   </recordInfo>
+   <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</accessCondition>
+</mods>

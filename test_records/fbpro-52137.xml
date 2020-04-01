@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <originInfo>
+    <dateIssued>1974</dateIssued>
+  </originInfo>
+  <subject>
+    <name>
+      <namePart>Bill Battle</namePart>
+    </name>
+  </subject>
+  <note displayLabel="Tags">Postseason</note>
+  <note displayLabel="Tags">(1970-76) Bill Battle</note>
+  <identifier type="filename">1974-12-16bowlguide</identifier>
+  <titleInfo>
+    <title>1974 Football Bowl Guide - UT vs Maryland (Liberty Bowl)</title>
+  </titleInfo>
+  <name type="corporate">
+    <namePart>University of Tennessee (campus).</namePart>
+    <role>
+      <roleTerm authority="marcrelators" type="text" valueURI="http://id.loc.gov/vocabulary/relators/cre.html">Creator</roleTerm>
+    </role>
+  </name>
+  <originInfo>
+    <dateCreated encoding="edtf" keyDate="yes" point="start">1974-12-16</dateCreated>
+  </originInfo>
+  <abstract>Issued for The University of Tennessee, Knoxville Football Programs for all home and special bowl games. Each piece is issued as a program guide for the game.</abstract>
+  <location>
+    <physicalLocation>The University of Tennessee Libraries, Knoxville</physicalLocation>
+  </location>
+  <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
+  <subject>
+    <topic>University of Tennessee (Knoxville campus) -- Football -- Periodicals.</topic>
+  </subject>
+  <subject>
+    <topic>Imprints, Tennessee -- Knoxville -- 1904.</topic>
+  </subject>
+  <relatedItem displayLabel="Project" type="host">
+    <titleInfo>
+      <title>The University of Tennessee, Knoxville Football Programs.</title>
+    </titleInfo>
+    <location>
+      <url>https://digital.lib.utk.edu/football_programs</url>
+    </location>
+  </relatedItem>
+  <typeOfResource>text</typeOfResource>
+  <language>
+    <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+  </language>
+  <physicalDescription>
+    <digitalOrigin>reformatted digital</digitalOrigin>
+  </physicalDescription>
+  <recordInfo>
+    <recordContentSource>University of Tennessee, Knoxville. Libraries</recordContentSource>
+    <recordOrigin>Created and edited in general conformance to MODS Guidelines (Version 3.5).</recordOrigin>
+    <languageOfCataloging>
+      <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+    </languageOfCataloging>
+  </recordInfo>
+  <note displayLabel="Tags">1974</note>
+</mods>

@@ -1,0 +1,66 @@
+
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <identifier type="local">0012_004266_000959</identifier>
+  <identifier type="issn">2688-0377</identifier>
+  <identifier type="pid">agrtfn:10001</identifier>
+  <titleInfo>
+    <title>Tennessee farm and home news, January 15, 1940</title>
+  </titleInfo>
+  <abstract>Weekly press release from Knoxville, Tennessee, covering farming and home economics. Includes advice column &quot;Uncle Jim says.&quot;</abstract>
+  <physicalDescription>
+    <form authority="aat">press releases</form>
+    <form authority="aat">periodicals</form>
+    <extent>7 pages</extent>
+  </physicalDescription>
+  <originInfo>
+    <dateIssued>1940</dateIssued>
+    <dateIssued encoding="edtf" keyDate="yes">1940</dateIssued>
+    <publisher>University of Tennessee (Knoxville campus). Agricultural Extension Service</publisher>
+    <place>
+      <placeTerm valueURI="http://id.loc.gov/authorities/names/n79109786">Knoxville (Tenn.)</placeTerm>
+    </place>
+    <issuance>serial</issuance>
+  </originInfo>
+  <note>Digitized with support from a Project Ceres grant. Project Ceres is a collaboration between the United States Agricultural Information Network (USAIN), the Agriculture Network Information Collaborative (AgNIC) and the Center for Research Libraries (CRL) to support ongoing preservation and digitization of collections in the field of agriculture.</note>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85047223">
+    <topic>Farm management</topic>
+  </subject>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85047218">
+    <topic>Farm life</topic>
+  </subject>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85002427">
+    <topic>Agriculture--Economic aspects</topic>
+  </subject>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85002310">
+    <topic>Agricultural education</topic>
+  </subject>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh88005077">
+    <topic>Animal breeding</topic>
+  </subject>
+  <subject authority="lcsh" valueURI="http://id.loc.gov/authorities/subjects/sh85035466">
+    <topic>Dairying</topic>
+  </subject>
+  <subject authority="naf" valueURI="http://id.loc.gov/authorities/names/n79060965">
+    <geographic>Tennessee</geographic>
+    <cartographics>
+      <coordinates>35.75035, -86.25027</coordinates>
+    </cartographics>
+  </subject>
+  <classification authority="lcc">S115 .T5</classification>
+  <typeOfResource>text</typeOfResource>
+  <language>
+    <languageTerm authority="iso639-2b" type="text">English</languageTerm>
+  </language>
+  <relatedItem displayLabel="Project" type="host">
+    <titleInfo>
+      <title>Tennessee Farm News</title>
+    </titleInfo>
+  </relatedItem>
+  <location>
+    <physicalLocation valueURI="http://id.loc.gov/authorities/names/no2014027633">University of Tennessee, Knoxville. Special Collections</physicalLocation>
+  </location>
+  <recordInfo>
+    <recordContentSource valueURI="http://id.loc.gov/authorities/names/n87808088">University of Tennessee, Knoxville. Libraries</recordContentSource>
+  </recordInfo>
+  <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</accessCondition>
+</mods>
