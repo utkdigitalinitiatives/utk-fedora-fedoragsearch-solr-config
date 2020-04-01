@@ -511,7 +511,7 @@
     <xsl:param name="datastream">not provided</xsl:param>
     
     <xsl:variable name="point_start">
-      <xsl:call-template name="get_ISO8601_date">
+      <xsl:call-template name="get_ISO8601_edtf_date">
         <xsl:with-param name="date" select="child::mods:dateCreated[@encoding='edtf'][@point='start']"/>
         <xsl:with-param name="pid" select="$pid"/>
         <xsl:with-param name="datastream" select="$datastream"/>
