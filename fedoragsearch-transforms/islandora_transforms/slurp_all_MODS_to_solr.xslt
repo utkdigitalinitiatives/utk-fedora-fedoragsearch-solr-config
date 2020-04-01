@@ -656,7 +656,7 @@
       -->
       <xsl:when test="not(contains($normalized-date, '~')) or not(contains($normalized-date, 'uU')) or not(contains($normalized-date, '?'))">
         <xsl:variable name="plain-edtf">
-          <xsl:call-template name="get_ISO8601_date">
+          <xsl:call-template name="get_ISO8601_edtf_date">
             <xsl:with-param name="date" select="$normalized-date"/>
             <xsl:with-param name="pid" select="$pid"/>
             <xsl:with-param name="datastream" select="$datastream"/>
