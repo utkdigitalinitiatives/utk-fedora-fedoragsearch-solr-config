@@ -12,6 +12,7 @@
   <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>-->
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
+  <xsl:variable name="digits" select="'1234567890'"/>
 
   <xsl:template match="foxml:datastream[@ID='MODS']/foxml:datastreamVersion[last()]" name="index_MODS">
     <xsl:param name="content"/>
@@ -452,7 +453,7 @@
   
   <!-- add _decade_ms -->
   <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
-    <xsl:variable name="decade" select="substring(., 1, 3)"/>
+    <xsl:variable name="decade" select="substring(normalize-space(.), 1, 3)"/>
     <field name="utk_mods_dateCreated_decade_ms">
       <xsl:value-of select="concat($decade, '0s')"/>
     </field>
@@ -704,8 +705,8 @@
     
       <!-- closing otherwise -->
       <xsl:otherwise>
-        <field name="utk_mods_originInfo_dateCreated_edtf_otherwise_ms">
-          <xsl:value-of select="normalize-space($normalized-date)"/>
+        <field name="utk_mods_date_feedback_ms">
+          <xsl:value-of select="concat('edtf_closing_otherwise: ', $normalized-date)"/>
         </field>
       </xsl:otherwise>
     </xsl:choose>
