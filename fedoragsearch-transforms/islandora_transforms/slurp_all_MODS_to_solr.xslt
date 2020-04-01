@@ -718,8 +718,8 @@
     <xsl:param name="datastream">not provided</xsl:param>
     
     <xsl:variable name="edtf-date">
-      <xsl:call-template name="get_ISO8601_date">
-        <xsl:with-param name="date" select="child::mods:dateIssued[@encoding='edtf']"/>
+      <xsl:call-template name="get_ISO8601_edtf_date">
+        <xsl:with-param name="date" select="normalize-space(child::mods:dateIssued[@encoding='edtf'])"/>
         <xsl:with-param name="pid" select="$pid"/>
         <xsl:with-param name="datastream" select="$datastream"/>
       </xsl:call-template>
@@ -790,7 +790,7 @@
       
       <xsl:otherwise>
         <xsl:variable name="date-other-simple">
-          <xsl:call-template name="get_ISO8601_date">
+          <xsl:call-template name="get_ISO8601_edtf_date">
             <xsl:with-param name="date" select="$normalized-date"/>
             <xsl:with-param name="pid" select="$pid"/>
             <xsl:with-param name="datastream" select="$datastream"/>
