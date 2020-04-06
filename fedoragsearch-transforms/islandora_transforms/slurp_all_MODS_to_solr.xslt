@@ -799,7 +799,7 @@
         
         <xsl:choose>
           <xsl:when test="not(normalize-space($date-other-simple)='')">
-            <field name="utk_mods_originInfo_dateOther_edft_dt">
+            <field name="utk_mods_originInfo_dateOther_edtf_dt">
               <xsl:value-of select="normalize-space($date-other-simple)"/>
             </field>
           </xsl:when>
