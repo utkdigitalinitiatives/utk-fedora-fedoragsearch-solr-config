@@ -356,6 +356,24 @@
     </xsl:if>
   </xsl:template>
   
+  <!-- add utk_mods_identifier_misc_ms for miscellaneous identifier values-->
+  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
+    <xsl:if test="self::node()[not(@type='local')] or self::node()[not(@type='filename')] or self::node()[not(@type='issn')] or self::node()[not(@type='isbn')] or self::node()[not(@type='pid')]">
+      <field name="utk_mods_identifier_misc_ms">
+        <xsl:value-of select="normalize-space(.)"/>
+      </field>
+    </xsl:if>
+  </xsl:template>
+  
+  <!-- add utk_mods_publication_identifier_ms for ISSN or ISBN identifier values-->
+  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
+    <xsl:if test="self::node()[@type='issn'] or self::node()[@type='isbn']">
+      <field name="utk_mods_publication_identifier_ms">
+        <xsl:value-of select="normalize-space(.)"/>
+      </field>
+    </xsl:if>
+  </xsl:template>
+   
   <!-- add utk_mods_language_languageTerm_text_ms for language text -->
   <xsl:template match="mods:mods/mods:language/mods:languageTerm[@type='text']" mode="utk_MODS">
     <field name="utk_mods_language_languageTerm_text_ms">
