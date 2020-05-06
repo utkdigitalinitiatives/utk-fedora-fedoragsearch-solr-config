@@ -106,6 +106,13 @@
     </field>
   </xsl:template>
   
+  <!-- add utk_mods_relatedItem_series_titleInfo_title_ms -->
+  <xsl:template match="mods:relatedItem[@type='series']/mods:titleInfo/mods:title" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_series_titleInfo_title_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
   <!-- the following template creates a UTK MODS Related Work Field -->
   <xsl:template match="mods:mods/mods:relatedItem[@type='otherVersion']" mode="utk_MODS">
     <xsl:variable name="related_work" select="child::mods:titleInfo/mods:title"/>
