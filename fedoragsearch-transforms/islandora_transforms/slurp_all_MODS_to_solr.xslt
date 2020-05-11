@@ -362,7 +362,7 @@
   </xsl:template>
   
   <!-- add utk_mods_identifier_misc_ms for miscellaneous identifier values-->
-  <xsl:template match="mods:mods/mods:identifier[not(@type='local') or not(@type='filename') or not(@type='issn') or not(@type='isbn') or not(@type='pid')]" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:identifier[not(@type='local') and not(@type='filename') and not(@type='issn') and not(@type='isbn') and not(@type='pid')]" mode="utk_MODS">
     <field name="utk_mods_identifier_misc_ms">
       <xsl:value-of select="normalize-space(.)"/>
     </field>
