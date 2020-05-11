@@ -355,30 +355,24 @@
   </xsl:template>
   
   <!-- add utk_mods_identifier_ms for local identifier values-->
-  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
-    <xsl:if test="self::node()[@type='local'] or self::node()[@type='filename']">
-      <field name="utk_mods_identifier_ms">
-        <xsl:value-of select="normalize-space(.)"/>
-      </field>
-    </xsl:if>
+  <xsl:template match="mods:mods/mods:identifier[@type='local' or @type='filename']" mode="utk_MODS">
+    <field name="utk_mods_identifier_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
   </xsl:template>
   
   <!-- add utk_mods_identifier_misc_ms for miscellaneous identifier values-->
-  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
-    <xsl:if test="self::node()[not(@type='local')] or self::node()[not(@type='filename')] or self::node()[not(@type='issn')] or self::node()[not(@type='isbn')] or self::node()[not(@type='pid')]">
-      <field name="utk_mods_identifier_misc_ms">
-        <xsl:value-of select="normalize-space(.)"/>
-      </field>
-    </xsl:if>
+  <xsl:template match="mods:mods/mods:identifier[not(@type='local') or not(@type='filename') or not(@type='issn') or not(@type='isbn') or not(@type='pid')]" mode="utk_MODS">
+    <field name="utk_mods_identifier_misc_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
   </xsl:template>
   
   <!-- add utk_mods_publication_identifier_ms for ISSN or ISBN identifier values-->
-  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
-    <xsl:if test="self::node()[@type='issn'] or self::node()[@type='isbn']">
-      <field name="utk_mods_publication_identifier_ms">
-        <xsl:value-of select="normalize-space(.)"/>
-      </field>
-    </xsl:if>
+  <xsl:template match="mods:mods/mods:identifier[@type='issn' or @type='isbn']" mode="utk_MODS">
+    <field name="utk_mods_publication_identifier_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
   </xsl:template>
    
   <!-- add utk_mods_language_languageTerm_text_ms for language text -->
