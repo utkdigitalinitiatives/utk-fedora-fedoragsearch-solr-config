@@ -192,6 +192,9 @@
             <xsl:when test="self::node()/@authority='agrovoc'">
               <xsl:value-of select="', (AGROVOC)'"/>
             </xsl:when>
+            <xsl:when test="self::node()/@authority='wikidata'">
+              <xsl:value-of select="', (Wikidata)'"/>
+            </xsl:when>
           </xsl:choose>
          </xsl:variable>
     
