@@ -192,6 +192,9 @@
             <xsl:when test="self::node()/@authority='agrovoc'">
               <xsl:value-of select="', (AGROVOC)'"/>
             </xsl:when>
+            <xsl:when test="self::node()/@authority='wikidata'">
+              <xsl:value-of select="', (Wikidata)'"/>
+            </xsl:when>
           </xsl:choose>
          </xsl:variable>
     
@@ -227,6 +230,11 @@
             </field>
             <field name="utk_mods_subject_temporal_facet_ms">
               <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+          </xsl:when>
+          <xsl:when test="self::node()[mods:name]">
+            <field name="utk_mods_subject_name_ms">
+              <xsl:value-of select="concat(normalize-space(child::mods:name/mods:namePart), $vAuthority)"/>
             </field>
           </xsl:when>
         </xsl:choose>
