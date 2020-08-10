@@ -232,6 +232,11 @@
               <xsl:value-of select="normalize-space(child::mods:temporal)"/>
             </field>
           </xsl:when>
+          <xsl:when test="self::node()[mods:name]">
+            <field name="utk_mods_subject_name_ms">
+              <xsl:value-of select="concat(normalize-space(child::mods:name/mods:namePart), $vAuthority)"/>
+            </field>
+          </xsl:when>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="self::node()[@displayLabel='Volunteer Voices Curriculum Topics']">
